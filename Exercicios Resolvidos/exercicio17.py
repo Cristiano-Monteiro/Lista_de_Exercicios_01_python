@@ -11,18 +11,32 @@ e sempre arredonde os valores para cima, isto é, considere latas cheias.
 """
 area = float(input('Tamanho da área(m²): '))
 cobertura = area / 6
+
+# APENAS LATAS
 if(cobertura % 18 == 0):
-    quantidade_latas = cobertura / 18
-    quantidade_galoes = 0.0
-    preco_galoes = 0.0
+    quantidade_latas_apenas = cobertura / 18
 else:
-    quantidade_latas = int(cobertura / 18)
-    multiplo_parte_inteira = 18 * quantidade_latas
-    parte_fracionaria = cobertura - multiplo_parte_inteira
-    quantidade_galoes = int(parte_fracionaria / 3.6) + 1
-    preco_galoes = quantidade_galoes * 25
+    quantidade_latas_apenas = int(cobertura / 18) + 1
+preco_latas_apenas = quantidade_latas_apenas * 80
+
+# APENAS GALÕES
+if(cobertura % 3.6 == 0):
+    quantidade_galoes_apenas = cobertura / 3.6
+else:
+    quantidade_galoes_apenas = int(cobertura /3.6) + 1
+preco_galoes_apenas = quantidade_galoes_apenas * 25
+
+# MISTURAR LATAS E GALÕES
+quantidade_latas = int(cobertura / 18)
+multiplo_parte_inteira = 18 * quantidade_latas
+parte_fracionaria = cobertura - multiplo_parte_inteira
+quantidade_galoes = int(parte_fracionaria / 3.6) + 1
+preco_galoes = quantidade_galoes * 25
 preco_latas = quantidade_latas * 80
-print('Quantidade de latas:', quantidade_latas, end=' ------ ')
-print('Preço Total das latas: R$', preco_latas)
-print('Quantidade de galões:', quantidade_galoes, end=' ------ ')
-print('Preço Total dos galões: R$', preco_galoes)
+preco_total = preco_latas + preco_galoes
+
+print('Quantidade de latas APENAS:', quantidade_latas_apenas, end=' ------ ')
+print('Preço Total das latas: R$', preco_latas_apenas)
+print('Quantidade de galões APENAS:', quantidade_galoes_apenas, end=' ------ ')
+print('Preço Total dos galões: R$', preco_galoes_apenas)
+print('Misturar {} latas e {} galões ------ Preço Total: R$ {}'.format(quantidade_latas, quantidade_galoes, preco_total))
